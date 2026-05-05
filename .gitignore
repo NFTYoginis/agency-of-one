@@ -1,0 +1,5 @@
+.DS_Store
+.trash/
+.claude/file-history/
+*.log
+node_modules/
