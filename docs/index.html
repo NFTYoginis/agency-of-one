@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agency of One — agency-grade structure for the one-person business</title>
+<meta name="description" content="A Claude Code template for solo founders running a content/design business through one orchestrator and several worker sandboxes. Briefs as contracts, hooks as guardrails, routines as maintenance. Free, MIT-licensed." />
+<meta property="og:title" content="Agency of One — agency-grade structure for the one-person business" />
+<meta property="og:description" content="One orchestrator. Several worker sandboxes. Briefs as the handoff contract. A free, MIT-licensed Claude Code template for solo founders." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://nftyoginis.github.io/agency-of-one/" />
+<meta property="og:image" content="https://nftyoginis.github.io/agency-of-one/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Agency of One — agency-grade structure for the one-person business. One orchestrator plans and dispatches; several worker sandboxes execute." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Agency of One" />
+<meta name="twitter:description" content="One orchestrator. Several worker sandboxes. Briefs as the handoff contract. A free, MIT-licensed Claude Code template for solo founders." />
+<meta name="twitter:image" content="https://nftyoginis.github.io/agency-of-one/og-image.png" />
+<style>
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --grid: #e8e6e0;
+  --grid-soft: #f0eee8;
+  --ink: #0a0a0a;
+  --ink-dim: #2a2a28;
+  --muted: #6a6a64;
+  --rule: #d8d4ca;
+  --accent: #1e4870;
+  --accent-deep: #143352;
+  --accent-soft: #e6ecf2;
+  --code-bg: #f4f2ec;
+  --warn: #8a3a2e;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* === sticky nav === */
+nav.top {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(250,250,247,0.92);
+  backdrop-filter: saturate(140%) blur(4px);
+  -webkit-backdrop-filter: saturate(140%) blur(4px);
+  border-bottom: 1px solid var(--rule);
+}
+nav.top .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px;
+}
+.brand {
+  font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+  font-size: 15px;
+}
+.brand .crosshair {
+  display: inline-block;
+  width: 12px; height: 12px;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-top: -2px;
+  position: relative;
+}
+.brand .crosshair::before, .brand .crosshair::after {
+  content: ""; position: absolute; background: var(--accent);
+}
+.brand .crosshair::before { left: 5px; top: 0; width: 2px; height: 12px; }
+.brand .crosshair::after { left: 0; top: 5px; width: 12px; height: 2px; }
+nav.top ul {
+  list-style: none; display: flex; gap: 22px; margin: 0; padding: 0;
+  align-items: center;
+}
+nav.top ul a {
+  color: var(--muted); font-size: 13.5px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+nav.top ul a:hover { color: var(--ink); text-decoration: none; }
+.cta {
+  display: inline-block; padding: 8px 14px;
+  border: 1px solid var(--ink); border-radius: 2px;
+  color: var(--ink); background: var(--bg);
+  font-weight: 600; font-size: 13px; letter-spacing: 0.03em;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-transform: uppercase;
+}
+.cta:hover { background: var(--ink); color: var(--bg); text-decoration: none; }
+
+/* === hero === */
+.hero { padding: 88px 0 56px; }
+.eyebrow {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 22px;
+}
+.eyebrow::before { content: "// "; color: var(--accent); }
+.hero h1 {
+  font-size: clamp(36px, 5vw, 56px); font-weight: 700;
+  letter-spacing: -0.022em; line-height: 1.06;
+  margin: 0 0 22px; max-width: 820px;
+}
+.hero .sub {
+  font-size: 18px; color: var(--ink-dim); max-width: 680px;
+  margin: 0 0 32px; line-height: 1.55;
+}
+.hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+.cta-primary {
+  display: inline-block; padding: 13px 24px;
+  background: var(--ink); color: var(--bg);
+  border-radius: 2px; font-weight: 700; font-size: 13.5px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.cta-primary:hover { background: var(--accent-deep); text-decoration: none; }
+.cta-secondary {
+  display: inline-block; padding: 13px 24px;
+  border: 1px solid var(--rule); color: var(--ink); background: var(--bg);
+  border-radius: 2px; font-weight: 700; font-size: 13.5px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.cta-secondary:hover { background: var(--accent-soft); text-decoration: none; }
+
+/* === schematic block === */
+.schematic {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 2px; padding: 36px 28px 24px;
+  position: relative;
+}
+.schematic .corner {
+  position: absolute; width: 10px; height: 10px;
+  border-color: var(--accent);
+}
+.schematic .corner.tl { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+.schematic .corner.tr { top: -1px; right: -1px; border-top: 2px solid; border-right: 2px solid; }
+.schematic .corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid; border-left: 2px solid; }
+.schematic .corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+.schematic .label {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.schematic svg { width: 100%; height: auto; display: block; }
+
+/* === sections === */
+section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: 0; }
+.section-eyebrow {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px;
+}
+.section-eyebrow::before { content: "// "; }
+h2 {
+  font-size: clamp(28px, 3.5vw, 36px); font-weight: 700;
+  letter-spacing: -0.018em; line-height: 1.15;
+  margin: 0 0 18px; max-width: 760px;
+}
+.lead {
+  font-size: 17px; color: var(--ink-dim); max-width: 700px;
+  margin-bottom: 36px; line-height: 1.55;
+}
+
+/* === layer grid === */
+.layers {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
+}
+.layer { background: var(--surface); padding: 26px 24px; position: relative; }
+.layer .num {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 10px;
+}
+.layer h3 {
+  font-size: 17px; font-weight: 700; letter-spacing: -0.005em;
+  margin: 0 0 8px;
+}
+.layer p {
+  font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0;
+}
+.layer code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px; background: var(--code-bg); padding: 1px 5px;
+  border-radius: 2px; color: var(--ink-dim);
+}
+
+/* === sample brief === */
+.sample {
+  background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 2px; padding: 28px 32px; margin-top: 12px;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px; line-height: 1.6;
+}
+.sample .meta {
+  font-size: 11px; color: var(--accent);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.sample h4 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 14.5px; font-weight: 700; margin: 18px 0 8px;
+  letter-spacing: -0.005em;
+}
+.sample h4:first-of-type { margin-top: 6px; }
+.sample ul { padding-left: 22px; margin: 0 0 14px; }
+.sample li { margin-bottom: 6px; }
+.sample em {
+  color: var(--accent); font-style: normal;
+}
+
+/* === proof block === */
+.proof {
+  border: 1px dashed var(--rule); border-radius: 2px;
+  padding: 36px 32px; background: var(--surface); text-align: center;
+}
+.proof .placeholder {
+  font-size: 13.5px; color: var(--muted);
+}
+.proof .placeholder b {
+  color: var(--ink); display: block; font-weight: 700;
+  margin-bottom: 8px; font-size: 14.5px;
+}
+
+/* === setup steps === */
+.steps {
+  counter-reset: step; list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 18px;
+}
+.steps li {
+  display: grid; grid-template-columns: 44px 1fr; gap: 18px;
+  align-items: start; padding: 18px 0; border-bottom: 1px solid var(--grid);
+}
+.steps li:last-child { border-bottom: 0; }
+.steps li:before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.04em; padding-top: 2px;
+}
+.steps h4 {
+  font-size: 15px; font-weight: 700; margin: 0 0 4px;
+  letter-spacing: -0.005em;
+}
+.steps p {
+  font-size: 13.5px; color: var(--muted); margin: 0; line-height: 1.55;
+}
+.steps code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  background: var(--code-bg); padding: 1px 5px; border-radius: 2px;
+  font-size: 12.5px;
+}
+
+/* === faq === */
+.faq dt {
+  font-weight: 700; margin-top: 24px; font-size: 15px;
+  letter-spacing: -0.005em;
+}
+.faq dt:first-of-type { margin-top: 0; }
+.faq dd {
+  margin: 6px 0 0; color: var(--ink-dim); font-size: 14px;
+  line-height: 1.6; max-width: 740px;
+}
+
+/* === footer === */
+footer {
+  padding: 48px 0 64px; border-top: 1px solid var(--rule);
+  font-size: 13px; color: var(--muted);
+}
+footer .wrap {
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
+}
+footer p { margin: 0; }
+footer a { color: var(--muted); }
+footer a:hover { color: var(--ink); }
+.attr {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px; letter-spacing: 0.04em;
+}
+
+@media (max-width: 720px) {
+  nav.top ul { display: none; }
+  .hero { padding: 56px 0 40px; }
+  section { padding: 56px 0; }
+  body { background-size: 18px 18px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand"><span class="crosshair"></span>Agency of One</div>
+    <ul>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#layers">What you get</a></li>
+      <li><a href="#sample">Sample brief</a></li>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="https://github.com/NFTYoginis/agency-of-one" class="cta">GitHub</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Free · MIT · Claude Code template</div>
+    <h1>Agency-grade structure for the one-person business.</h1>
+    <p class="sub">
+      One orchestrator. Several worker sandboxes. Briefs as the handoff contract between them. ICM-aligned context layers. Hooks as guardrails. Routines as maintenance. The template ships the structure — you fill in your brand.
+    </p>
+    <div class="ctas">
+      <a class="cta-primary" href="#setup">Clone the template →</a>
+      <a class="cta-secondary" href="#architecture">See the architecture</a>
+    </div>
+
+    <div class="schematic" id="architecture">
+      <span class="corner tl"></span><span class="corner tr"></span>
+      <span class="corner bl"></span><span class="corner br"></span>
+      <div class="label">Fig. 01 — Dispatch architecture</div>
+      <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="dashpattern" patternUnits="userSpaceOnUse" width="6" height="2">
+            <line x1="0" y1="1" x2="4" y2="1" stroke="#1e4870" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <!-- Orchestrator (top center) -->
+        <rect x="340" y="20" width="200" height="64" fill="#fafaf7" stroke="#1e4870" stroke-width="1.5"/>
+        <text x="440" y="46" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="11" fill="#1e4870" letter-spacing="2">ORCHESTRATOR</text>
+        <text x="440" y="68" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#6a6a64">one human-in-the-loop session</text>
+
+        <!-- Brief tags around orchestrator -->
+        <rect x="200" y="32" width="100" height="22" fill="#ffffff" stroke="#d8d4ca" stroke-width="1"/>
+        <text x="250" y="47" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#6a6a64">brief.md in</text>
+        <line x1="300" y1="43" x2="340" y2="48" stroke="#d8d4ca" stroke-width="1"/>
+
+        <rect x="580" y="32" width="100" height="22" fill="#ffffff" stroke="#d8d4ca" stroke-width="1"/>
+        <text x="630" y="47" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#6a6a64">artifact out</text>
+        <line x1="540" y1="48" x2="580" y2="43" stroke="#d8d4ca" stroke-width="1"/>
+
+        <!-- Dispatch lines from orchestrator down -->
+        <line x1="440" y1="84" x2="440" y2="160" stroke="#1e4870" stroke-width="1.5"/>
+        <line x1="160" y1="160" x2="720" y2="160" stroke="#1e4870" stroke-width="1.5"/>
+        <line x1="160" y1="160" x2="160" y2="200" stroke="#1e4870" stroke-width="1.5"/>
+        <line x1="360" y1="160" x2="360" y2="200" stroke="#1e4870" stroke-width="1.5"/>
+        <line x1="520" y1="160" x2="520" y2="200" stroke="#1e4870" stroke-width="1.5"/>
+        <line x1="720" y1="160" x2="720" y2="200" stroke="#1e4870" stroke-width="1.5"/>
+
+        <!-- 4 worker sandboxes -->
+        <g>
+          <rect x="80" y="200" width="160" height="80" fill="#ffffff" stroke="#1e4870" stroke-width="1.5"/>
+          <text x="160" y="226" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#1e4870" letter-spacing="2">CONTENT-CLAUDE</text>
+          <text x="160" y="250" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">posts · captions · scripts</text>
+          <text x="160" y="266" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="8" fill="#6a6a64">— sandbox —</text>
+        </g>
+        <g>
+          <rect x="280" y="200" width="160" height="80" fill="#ffffff" stroke="#1e4870" stroke-width="1.5"/>
+          <text x="360" y="226" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#1e4870" letter-spacing="2">DESIGN-CLAUDE</text>
+          <text x="360" y="250" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">pages · cards · OGs</text>
+          <text x="360" y="266" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="8" fill="#6a6a64">— sandbox —</text>
+        </g>
+        <g>
+          <rect x="440" y="200" width="160" height="80" fill="#ffffff" stroke="#1e4870" stroke-width="1.5"/>
+          <text x="520" y="226" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#1e4870" letter-spacing="2">RESEARCH-CLAUDE</text>
+          <text x="520" y="250" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">scouts · reports · synthesis</text>
+          <text x="520" y="266" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="8" fill="#6a6a64">— sandbox —</text>
+        </g>
+        <g>
+          <rect x="640" y="200" width="160" height="80" fill="#ffffff" stroke="#1e4870" stroke-width="1.5"/>
+          <text x="720" y="226" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="10" fill="#1e4870" letter-spacing="2">VA — HUMAN</text>
+          <text x="720" y="250" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">handoff folder · checklist</text>
+          <text x="720" y="266" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="8" fill="#6a6a64">— briefed —</text>
+        </g>
+
+        <!-- Scale markers -->
+        <text x="20" y="20" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">L0</text>
+        <text x="20" y="160" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">L1</text>
+        <text x="20" y="240" font-family="ui-monospace, 'SF Mono', Menlo, monospace" font-size="9" fill="#6a6a64">L3</text>
+        <line x1="36" y1="14" x2="60" y2="14" stroke="#d8d4ca" stroke-width="1"/>
+        <line x1="36" y1="160" x2="60" y2="160" stroke="#d8d4ca" stroke-width="1"/>
+        <line x1="36" y1="240" x2="60" y2="240" stroke="#d8d4ca" stroke-width="1"/>
+      </svg>
+    </div>
+
+  </div>
+</header>
+
+<section id="layers">
+  <div class="wrap">
+    <div class="section-eyebrow">What you get</div>
+    <h2>Six layers. Day-one structure. Your brand goes in.</h2>
+    <p class="lead">
+      The template ships the architecture. You fill in your specific brand content and content cadence. Folder tree, brief templates, hooks, skills, routine specs, and context layers are all wired before you write a single line of your own.
+    </p>
+    <div class="layers">
+      <div class="layer">
+        <div class="num">L1 / orchestrator + workers</div>
+        <h3>One root. Several sandboxes.</h3>
+        <p>One human-in-the-loop session at the root. Specialized sandboxes underneath — <code>content-claude/</code>, <code>design-claude/</code>, <code>research-claude/</code>, <code>va/</code>. Each sandbox is isolated; the orchestrator dispatches.</p>
+      </div>
+      <div class="layer">
+        <div class="num">L2 / briefs</div>
+        <h3>Briefs as the handoff contract.</h3>
+        <p>Every dispatch is a cold-start brief a worker can read without prior chat history. Templates included for content briefs, design briefs, research scouts.</p>
+      </div>
+      <div class="layer">
+        <div class="num">L3 / ICM context layers</div>
+        <h3>L0 / L1 / L3 / L4, mapped.</h3>
+        <p>Root <code>CLAUDE.md</code> (L0), root <code>CONTEXT.md</code> (L1), <code>_config/</code> + sandbox references (L3), per-brief working artifacts (L4). <code>ARCHITECTURE.md</code> spells out why this template skips L2.</p>
+      </div>
+      <div class="layer">
+        <div class="num">L4 / routines</div>
+        <h3>Weekly + monthly maintenance.</h3>
+        <p>Workers purge. Orchestrator audits. Operator validates. Monthly adds heavier compression and the archive sweep. Specs included.</p>
+      </div>
+      <div class="layer">
+        <div class="num">L5 / hooks</div>
+        <h3>Four guardrails out of the box.</h3>
+        <p><code>safety-check.py</code> (rm -rf / force-push prompt) · <code>snapshot-before-edit.py</code> (start-of-day snapshots) · <code>auto-stamp-date.py</code> (auto-bumps <code>Last updated:</code> on trackers) · <code>handoff-files-guard.py</code> (prompts before editing handed-off files).</p>
+      </div>
+      <div class="layer">
+        <div class="num">L6 / memory + skills</div>
+        <h3>Memory index + 2 skills.</h3>
+        <p><code>MEMORY.md</code> with explicit slots for <code>user</code>, <code>feedback</code>, <code>project</code>, <code>reference</code> memories. Skills: <code>diagnose-recurring-edits</code> (aggregate breadcrumbs into source-level fix candidates) and <code>verify-handoff</code> (cross-check shipped output against the dispatching brief).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sample">
+  <div class="wrap">
+    <div class="section-eyebrow">Sample brief</div>
+    <h2>What a dispatch looks like.</h2>
+    <p class="lead">
+      A brief is a plain markdown file the operator drops into a worker's <code>briefs/</code> folder. The worker reads it cold-start, executes, ships, and breadcrumbs the result in <code>STATUS.md</code>. No prior chat history required.
+    </p>
+
+    <div class="sample">
+      <div class="meta">briefs / 2026-05-14 / sample-content-brief.md</div>
+      <h4># Dispatch — Carousel for Week 19, Tuesday slot</h4>
+      <p><em>Worker:</em> content-claude<br/>
+         <em>Due:</em> 2026-05-14 EOD<br/>
+         <em>Format:</em> 9-slide Instagram carousel, 1080×1350 each</p>
+      <h4>Topic</h4>
+      <ul>
+        <li>The single bias most solo founders miss when they're pricing their first offer</li>
+      </ul>
+      <h4>Source material</h4>
+      <ul>
+        <li>operator's 2024 transcript on pricing — `_config/transcripts/2024-pricing.md`</li>
+        <li>three reader DMs flagged in `MEMORY.md` (project memory: pricing-questions)</li>
+      </ul>
+      <h4>Voice gates</h4>
+      <ul>
+        <li>No <em>"transformative"</em>, <em>"journey"</em>, <em>"unlock"</em>, <em>"game-changer"</em></li>
+        <li>Em-dash ≤ 1 per paragraph in body prose</li>
+        <li>Zero emojis in slides 1, 2, 9. Optional ≤ 1 in middle slides.</li>
+      </ul>
+      <h4>Deliverables</h4>
+      <ul>
+        <li>9 slide-copy blocks (text only; design-claude handles visuals separately)</li>
+        <li>1 caption block (250–400 words)</li>
+        <li>5 hashtag block (1 anchor + 4 discovery)</li>
+        <li>Breadcrumb into <code>STATUS.md</code> on ship</li>
+      </ul>
+      <h4>Out of scope</h4>
+      <ul>
+        <li>Visual rendering (separate brief to design-claude)</li>
+        <li>Scheduling (operator-side)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-eyebrow">Proof block</div>
+    <h2>What others have built with it.</h2>
+    <div class="proof">
+      <!-- TODO: operator — add real solo-founder testimonials post-cold-test. -->
+      <div class="placeholder">
+        <b>Placeholder by design.</b>
+        Real-user receipts go here after the first cohort of solo founders runs the template against their own business.
+        No invented testimonials, no synthetic engagement metrics.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="wrap">
+    <div class="section-eyebrow">Setup</div>
+    <h2>Four steps. About 30 minutes.</h2>
+    <p class="lead">
+      Clone the template, fill in your brand layer, customize the worker sandboxes you'll use, drop a first brief. The architecture works on day one; the content you put into it improves with each dispatch.
+    </p>
+    <ol class="steps">
+      <li>
+        <div>
+          <h4>Clone the template</h4>
+          <p><code>gh repo clone NFTYoginis/agency-of-one your-business-name</code> — or download the ZIP. Open the folder in your editor of choice.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Fill in your brand layer</h4>
+          <p>Edit <code>CONTEXT.md</code> (your business at a glance) and <code>_config/brand.md</code> (your voice, your audience, your offers, your pricing). Each file has TODO markers showing what to replace.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Customize the worker sandboxes you'll actually use</h4>
+          <p>Inside each sandbox (<code>content-claude/</code>, <code>design-claude/</code>, <code>research-claude/</code>, <code>va/</code>), there's a <code>CLAUDE.md</code> with worker-specific instructions. Edit those to match your actual content needs. Delete sandboxes you don't need.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Drop a first brief</h4>
+          <p>Pick a worker. Open its <code>briefs/</code> folder. Create a new markdown file describing what you want shipped. The worker reads it cold-start, executes, breadcrumbs <code>STATUS.md</code>. Refine the brief template as you go.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>What you're probably about to ask.</h2>
+    <dl class="faq">
+      <dt>Is this a Claude Project, a Claude Code workflow, or both?</dt>
+      <dd>Claude Code, specifically. The orchestrator + worker sandboxes pattern uses Claude Code's working-directory + hooks model. You can use individual sandboxes as Claude Projects in isolation, but the orchestration loop assumes Claude Code at the root.</dd>
+
+      <dt>What does it cost?</dt>
+      <dd>Zero beyond your existing Claude subscription. MIT-licensed. Fork it, modify it, redistribute it.</dd>
+
+      <dt>Who's it for?</dt>
+      <dd>Solo founders running content + design + research + light VA-coordination through one chat. The "agency of one" — one operator, agency-grade structure. Not for: teams with multiple humans-in-the-loop (the orchestrator pattern assumes a single decision-maker), or pure-code projects (the template is content/design business-shaped, not codebase-shaped).</dd>
+
+      <dt>Why one orchestrator + multiple sandboxes — why not one big agent?</dt>
+      <dd>Context isolation. Each worker has its own <code>CLAUDE.md</code>, its own <code>MEMORY.md</code>, its own routines. When the design worker hits 100K tokens, it doesn't poison the content worker. When the research worker discovers a new pattern, you choose whether to propagate it to others. Briefs are the only contract across the boundary.</dd>
+
+      <dt>Why briefs instead of just chatting?</dt>
+      <dd>Briefs survive chat-history compression. They give the worker a cold-start grounding it can re-read on a fresh session. They produce an audit trail — six months in, you can grep <code>briefs/</code> and see exactly what you dispatched. And they make the work portable: a brief is a thing you could hand to a freelancer or another AI.</dd>
+
+      <dt>What's "ICM" — and why does it matter?</dt>
+      <dd>Inherited Context Model. The four-layer model the template uses (L0 = global instructions, L1 = current-state context, L3 = scoped references, L4 = per-task working artifacts) keeps context fresh without re-feeding everything on every call. <code>ARCHITECTURE.md</code> walks the full rationale.</dd>
+
+      <dt>How do I know if a brief actually shipped what I asked for?</dt>
+      <dd>The <code>verify-handoff</code> skill. Run it from the orchestrator pointing at a brief + the artifact the worker produced; it cross-checks the brief's deliverables against what's actually on disk and flags gaps.</dd>
+
+      <dt>Will it work for non-content businesses?</dt>
+      <dd>The architecture transfers. The example briefs and worker shapes are tuned to content/design/research. If you're running a consulting practice, an indie SaaS, or a service business, the orchestrator + worker + briefs pattern still applies — you'll just want to rename and re-scope the sandboxes.</dd>
+
+      <dt>How do I contribute?</dt>
+      <dd>GitHub issues + PRs. Especially welcome: new worker-sandbox patterns, new hooks, new skills, refinements to the brief templates.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>
+      <b>Agency of One</b> · MIT-licensed · <a href="https://github.com/NFTYoginis/agency-of-one">github.com/NFTYoginis/agency-of-one</a>
+    </p>
+    <p class="attr">
+      By Gabe — Your AI Specialist
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

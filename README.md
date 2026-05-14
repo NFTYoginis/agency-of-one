@@ -1,4 +1,4 @@
-# creator-orchestrator-template
+# Agency of One
 
 A Claude Code template for running a content/design business as a solo operator with one orchestrator and several worker sandboxes. The orchestrator plans and dispatches; workers execute inside their own sandbox; briefs are the handoff contract between them. The template ships the *structure* — folders, brief templates, hooks, skills, routine specs, ICM-aligned context layers — without the operator's actual brand content. You fill in your brand and content; the architecture works on day one.
 
@@ -59,7 +59,7 @@ Routine days run ~5–10k tokens. The full-brief mode (operator says *"full brie
 ## File layout
 
 ```text
-creator-orchestrator-template/
+agency-of-one/
 ├── README.md                       ← this file
 ├── ARCHITECTURE.md                 ← the five-layer ICM mapping + diagram
 ├── LICENSE.md                      ← PolyForm Noncommercial 1.0.0
