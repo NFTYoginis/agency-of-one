@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Agency of One — agency-grade structure for the one-person business</title>
+<title>Agency of One — folder architecture for the one-person business</title>
 <meta name="description" content="A Claude Code template for solo founders running a content/design business through one orchestrator and several worker sandboxes. Briefs as contracts, hooks as guardrails, routines as maintenance. Free, MIT-licensed." />
-<meta property="og:title" content="Agency of One — agency-grade structure for the one-person business" />
+<meta property="og:title" content="Agency of One — folder architecture for the one-person business" />
 <meta property="og:description" content="One orchestrator. Several worker sandboxes. Briefs as the handoff contract. A free, MIT-licensed Claude Code template for solo founders." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nftyoginis.github.io/agency-of-one/" />
 <meta property="og:image" content="https://nftyoginis.github.io/agency-of-one/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Agency of One — agency-grade structure for the one-person business. One orchestrator plans and dispatches; several worker sandboxes execute." />
+<meta property="og:image:alt" content="Agency of One — folder architecture for the one-person business. One orchestrator plans and dispatches; several worker sandboxes execute." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Agency of One" />
 <meta name="twitter:description" content="One orchestrator. Several worker sandboxes. Briefs as the handoff contract. A free, MIT-licensed Claude Code template for solo founders." />
@@ -324,7 +324,7 @@ footer a:hover { color: var(--ink); }
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Free · MIT · Claude Code template</div>
-    <h1>Agency-grade structure for the one-person business.</h1>
+    <h1>Folder architecture for the one-person business: 1 orchestrator + 4 worker sandboxes.</h1>
     <p class="sub">
       One orchestrator. Several worker sandboxes. Briefs as the handoff contract between them. ICM-aligned context layers. Hooks as guardrails. Routines as maintenance. The template ships the structure — you fill in your brand.
     </p>
@@ -434,7 +434,7 @@ footer a:hover { color: var(--ink); }
       </div>
       <div class="layer">
         <div class="num">L5 / hooks</div>
-        <h3>Four guardrails out of the box.</h3>
+        <h3>Four Python hooks out of the box.</h3>
         <p><code>safety-check.py</code> (rm -rf / force-push prompt) · <code>snapshot-before-edit.py</code> (start-of-day snapshots) · <code>auto-stamp-date.py</code> (auto-bumps <code>Last updated:</code> on trackers) · <code>handoff-files-guard.py</code> (prompts before editing handed-off files).</p>
       </div>
       <div class="layer">
@@ -554,7 +554,7 @@ footer a:hover { color: var(--ink); }
       <dd>Zero beyond your existing Claude subscription. MIT-licensed. Fork it, modify it, redistribute it.</dd>
 
       <dt>Who's it for?</dt>
-      <dd>Solo founders running content + design + research + light VA-coordination through one chat. The "agency of one" — one operator, agency-grade structure. Not for: teams with multiple humans-in-the-loop (the orchestrator pattern assumes a single decision-maker), or pure-code projects (the template is content/design business-shaped, not codebase-shaped).</dd>
+      <dd>Solo founders running content + design + research + light VA-coordination through one chat. The "agency of one" — one operator, folder architecture handling the multi-worker shape. Not for: teams with multiple humans-in-the-loop (the orchestrator pattern assumes a single decision-maker), or pure-code projects (the template is content/design business-shaped, not codebase-shaped).</dd>
 
       <dt>Why one orchestrator + multiple sandboxes — why not one big agent?</dt>
       <dd>Context isolation. Each worker has its own <code>CLAUDE.md</code>, its own <code>MEMORY.md</code>, its own routines. When the design worker hits 100K tokens, it doesn't poison the content worker. When the research worker discovers a new pattern, you choose whether to propagate it to others. Briefs are the only contract across the boundary.</dd>
